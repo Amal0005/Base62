@@ -10,6 +10,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
@@ -18,11 +19,13 @@ export default function Dashboard() {
     }
   }, [navigate]);
 
-  const handleLogout = () => {
-    if (window.confirm('Are you sure you want to log out?')) {
-      localStorage.removeItem('access_token');
-      navigate('/login');
-    }
+  const handleLogoutClick = () => {
+    setShowLogoutModal(true);
+  };
+
+  const confirmLogout = () => {
+    localStorage.removeItem('access_token');
+    navigate('/login');
   };
 
   const handleShorten = async (e: React.FormEvent) => {
@@ -102,7 +105,7 @@ export default function Dashboard() {
         </div>
         <div className="flex items-center gap-6">
           <button 
-            onClick={handleLogout}
+            onClick={handleLogoutClick}
             className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors font-medium text-sm bg-white/5 px-4 py-2 rounded-lg hover:bg-white/10"
           >
             <LogOut size={16} /> Logout
@@ -206,6 +209,47 @@ export default function Dashboard() {
           )}
         </AnimatePresence>
       </main>
+
+      {/* Logout Modal */}
+      <AnimatePresence>
+        {showLogoutModal && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          >
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="bg-[#0f172a] border border-white/10 p-6 rounded-2xl shadow-2xl max-w-sm w-full"
+            >
+              <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                <LogOut className="w-6 h-6 text-red-400" />
+              </div>
+              <h3 className="text-xl font-bold text-center mb-2 text-white">Sign Out</h3>
+              <p className="text-gray-400 text-center mb-6 text-sm">
+                Are you sure you want to log out?
+              </p>
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => setShowLogoutModal(false)}
+                  className="flex-1 py-3 px-4 bg-white/5 hover:bg-white/10 text-white rounded-xl font-medium transition-colors border border-white/10"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={confirmLogout}
+                  className="flex-1 py-3 px-4 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium transition-colors shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+                >
+                  Logout
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
