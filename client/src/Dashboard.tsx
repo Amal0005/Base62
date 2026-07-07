@@ -37,7 +37,7 @@ export default function Dashboard() {
     const token = localStorage.getItem('access_token');
 
     try {
-      const response = await fetch('http://localhost:3000/urls/shorten', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/urls/shorten`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

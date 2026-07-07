@@ -15,7 +15,7 @@ export class UrlsController {
     const userId = (request as any).user.sub;
     const url = await this.urlsService.createShortUrl(createUrlDto.originalUrl, userId);
     return {
-      shortUrl: `http://localhost:3000/urls/${url.shortId}`,
+      shortUrl: `${process.env.BASE_URL}/urls/${url.shortId}`,
       originalUrl: url.originalUrl
     };
   }
