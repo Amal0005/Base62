@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Mail, CheckCircle, ArrowRight, ShieldCheck, Zap, Activity } from 'lucide-react';
+import { Mail, CheckCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 import { verifySchema } from './validation';
 import { authService } from './services/authService';
 import { motion, type Variants } from 'framer-motion';
