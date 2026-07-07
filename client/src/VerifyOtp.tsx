@@ -1,0 +1,267 @@
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Mail, CheckCircle, ArrowRight, ShieldCheck, Zap, Activity } from 'lucide-react';
+import { verifySchema } from './validation';
+import { authService } from './services/authService';
+import { motion, type Variants } from 'framer-motion';
+
+export default function VerifyOtp() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email || '';
+
+  const [otp, setOtp] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [fieldError, setFieldError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
+  const [resendMessage, setResendMessage] = useState('');
+  const [otpTimeLeft, setOtpTimeLeft] = useState(60);
+  const [resendCooldown, setResendCooldown] = useState(0);
+
+  useEffect(() => {
+    if (otpTimeLeft > 0) {
+      const timer = setTimeout(() => setOtpTimeLeft(otpTimeLeft - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [otpTimeLeft]);
+
+  useEffect(() => {
+    if (resendCooldown > 0) {
+      const timer = setTimeout(() => setResendCooldown(resendCooldown - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [resendCooldown]);
+
+  const handleResend = async () => {
+    if (!email) {
+      return setError('No email provided. Please register first.');
+    }
+    
+    setResendLoading(true);
+    setResendMessage('');
+    setError('');
+    
+    try {
+      await authService.resendOtp(email);
+      setResendMessage('A new verification code has been sent.');
+      setOtpTimeLeft(60);
+      setResendCooldown(60);
+    } catch (err: any) {
+      setError(err.message || 'Failed to resend code');
+    } finally {
+      setResendLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setFieldError('');
+    
+    if (!email) {
+      return setError('No email provided. Please register first.');
+    }
+
+    if (otpTimeLeft === 0) {
+      return setError('Code has expired. Please request a new one.');
+    }
+    
+    const result = verifySchema.safeParse({ otp });
+    if (!result.success) {
+      return setFieldError(result.error.issues[0].message);
+    }
+    
+    setLoading(true);
+    
+    try {
+      await authService.verifyOtp({ email, otp });
+      setSuccess(true);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 15 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  };
+
+  if (success) {
+    return (
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 1.05 }}
+        transition={{ duration: 0.4 }}
+        className="min-h-screen bg-[#0f172a] flex items-center justify-center p-4 selection:bg-blue-500/30 font-sans"
+      >
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", bounce: 0.5 }}
+          className="bg-white p-12 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] w-full max-w-md text-center border-4 border-white"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", bounce: 0.6 }}
+          >
+            <CheckCircle size={64} className="text-green-500 mx-auto mb-6 drop-shadow-md" />
+          </motion.div>
+          <h2 className="text-3xl font-bold mb-3 text-gray-900 tracking-tight">Account Verified!</h2>
+          <p className="text-gray-500 mb-8 font-medium">
+            Your email has been verified. You can now log in to start shortening URLs.
+          </p>
+          <motion.button 
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => navigate('/login')}
+            className="w-full py-4 bg-gray-900 text-white rounded-xl font-bold hover:bg-black transition-colors flex justify-center items-center gap-2 shadow-xl shadow-gray-900/20 group"
+          >
+            Go to Login <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </motion.button>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className="min-h-screen bg-[#0f172a] text-white flex overflow-hidden font-sans selection:bg-blue-500/30"
+    >
+      
+      {/* Left Animated Section */}
+      <div className="hidden lg:flex w-[55%] relative items-center justify-center p-12">
+        {/* Dynamic Background Elements */}
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[20%] left-[20%] w-[400px] h-[400px] bg-green-500/20 rounded-full blur-[100px]"
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.5, 1], x: [0, 100, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[10%] right-[10%] w-[300px] h-[300px] bg-emerald-500/20 rounded-full blur-[100px]"
+        />
+        
+        {/* Floating Elements Composition */}
+        <div className="relative w-full max-w-lg aspect-square perspective-1000">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="absolute inset-0 m-auto w-64 h-64 bg-white/5 backdrop-blur-2xl rounded-[2rem] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.4)] flex flex-col items-center justify-center z-20 overflow-hidden"
+          >
+            <motion.div 
+              animate={{ x: ['-100%', '200%'] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 2 }}
+              className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg]"
+            />
+            <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(16,185,129,0.5)]">
+              <ShieldCheck className="w-10 h-10 text-white" />
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">Verify</h2>
+            <p className="text-emerald-200/80 mt-2 font-medium">Identity Check</p>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Right Form Section */}
+      <div className="w-full lg:w-[45%] flex items-center justify-center p-8 bg-white text-gray-900 relative rounded-l-[2.5rem] shadow-[-20px_0_60px_rgba(0,0,0,0.5)] z-40">
+        <div className="w-full max-w-[380px]">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mb-8 text-center"
+          >
+            <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+              <Mail className="w-8 h-8 text-emerald-600" />
+            </div>
+            <h1 className="text-3xl font-bold mb-2 tracking-tight">Check your email</h1>
+            <p className="text-gray-500 text-sm">
+              We sent a 6-digit code to <br/><b className="text-gray-900 font-bold">{email || 'your email'}</b>
+            </p>
+          </motion.div>
+
+          <motion.form 
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            onSubmit={handleSubmit} 
+            className="flex flex-col gap-5"
+          >
+            {error && (
+              <motion.div variants={itemVariants} className="bg-red-50 text-red-600 text-sm p-3 rounded-xl border border-red-100 text-center flex items-center justify-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                {error}
+              </motion.div>
+            )}
+
+            <motion.div variants={itemVariants} className="mb-2">
+              <input 
+                type="text" 
+                maxLength={6}
+                className={`w-full py-4 text-center text-4xl font-bold tracking-[0.5em] border-2 ${fieldError ? 'border-red-200 bg-red-50 focus:border-red-500' : 'border-gray-100 bg-gray-50 focus:border-emerald-500 focus:bg-white'} rounded-xl outline-none transition-all font-mono`}
+                placeholder="••••••" 
+                value={otp}
+                onChange={(e) => {
+                  setOtp(e.target.value);
+                  if (fieldError) setFieldError('');
+                }}
+              />
+              {fieldError && <p className="text-red-500 text-xs text-center mt-2">{fieldError}</p>}
+            </motion.div>
+
+            <motion.button 
+              variants={itemVariants}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit" 
+              disabled={loading || otpTimeLeft === 0}
+              className="w-full py-4 mt-2 bg-emerald-600 text-white rounded-xl text-sm font-bold hover:bg-emerald-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 group shadow-xl shadow-emerald-600/20"
+            >
+              {loading ? 'Verifying...' : otpTimeLeft === 0 ? 'Code Expired' : 'Verify Code'}
+              {!loading && otpTimeLeft > 0 && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+            </motion.button>
+            
+            {resendMessage && (
+              <motion.div variants={itemVariants} className="bg-emerald-50 text-emerald-600 text-sm p-3 rounded-xl border border-emerald-100 text-center flex items-center justify-center gap-2">
+                <CheckCircle className="w-4 h-4 text-emerald-500" />
+                {resendMessage}
+              </motion.div>
+            )}
+
+            <motion.div variants={itemVariants} className="text-center text-sm text-gray-500 mt-4">
+              Didn't receive the code?{' '}
+              <button 
+                type="button" 
+                onClick={handleResend}
+                disabled={resendLoading || resendCooldown > 0}
+                className="text-emerald-600 font-bold hover:underline ml-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:no-underline"
+              >
+                {resendLoading ? 'Resending...' : resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend it'}
+              </button>
+            </motion.div>
+          </motion.form>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
