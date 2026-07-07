@@ -20,7 +20,7 @@ export class MailService {
   async sendOtpEmail(to: string, otp: string): Promise<void> {
     try {
       const mailOptions = {
-        from: '"No Reply" <noreply@example.com>',
+        from: `"Base62 Admin" <${process.env.SMTP_USER}>`,
         to,
         subject: 'Your One-Time Password (OTP)',
         text: `Your OTP is ${otp}. It will expire in 10 minutes.`,
