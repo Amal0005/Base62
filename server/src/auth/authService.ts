@@ -23,14 +23,38 @@ export class AuthService implements IAuthService {
     return this.usersService.validateUser(email, pass);
   }
 
-  async login(user: User): Promise<{ access_token: string }> {
+  async login(user: User): Promise<{ access_token: string; refresh_token: string }> {
     if (!user.isVerified) {
       throw new UnauthorizedException('Please verify your email before logging in');
     }
     const payload = { email: user.email, sub: (user as any)._id };
+    
+    const access_token = await this.jwtService.signAsync(payload);
+    const refresh_token = await this.jwtService.signAsync(payload, {
+      secret: process.env.JWT_REFRESH_SECRET || 'refreshSecret',
+      expiresIn: '7d',
+    });
+
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token,
+      refresh_token,
     };
+  }
+
+  async refreshToken(token: string): Promise<{ access_token: string }> {
+    try {
+      const payload = await this.jwtService.verifyAsync(token, {
+        secret: process.env.JWT_REFRESH_SECRET || 'refreshSecret',
+      });
+
+      // Generate a new access token
+      const newPayload = { email: payload.email, sub: payload.sub };
+      const access_token = await this.jwtService.signAsync(newPayload);
+      
+      return { access_token };
+    } catch (error) {
+      throw new UnauthorizedException('Invalid or expired refresh token');
+    }
   }
 
   async register(data: CreateUserDto): Promise<User> {

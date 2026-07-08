@@ -18,3 +18,7 @@ export const loginSchema = z.object({
 export const verifySchema = z.object({
   otp: z.string().length(6, 'OTP must be exactly 6 digits')
 });
+
+export const urlSchema = z.object({
+  url: z.string().url('Please enter a valid URL (e.g., https://google.com)')
+});

@@ -47,6 +47,9 @@ export default function Login() {
     try {
       const data = await authService.login(formData);
       localStorage.setItem('access_token', data.access_token);
+      if (data.refresh_token) {
+        localStorage.setItem('refresh_token', data.refresh_token);
+      }
       navigate('/dashboard');
     } catch (err: any) {
       setError(err.message);

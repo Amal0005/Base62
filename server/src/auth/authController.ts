@@ -31,6 +31,15 @@ export class AuthController {
   }
 
   @HttpCode(HttpStatus.OK)
+  @Post('refresh-token')
+  async refreshToken(@Body() body: { refresh_token: string }) {
+    if (!body.refresh_token) {
+      throw new BadRequestException('Refresh token is required');
+    }
+    return this.authService.refreshToken(body.refresh_token);
+  }
+
+  @HttpCode(HttpStatus.OK)
   @Post('request-otp')
   async requestOtp(@Body() body: { email: string }) {
     if (!body.email) {

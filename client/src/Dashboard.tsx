@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link, Link2, Copy, Check, LogOut, Activity, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { urlSchema } from './validation';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -12,19 +13,13 @@ export default function Dashboard() {
   const [copied, setCopied] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (!token) {
-      navigate('/login');
-    }
-  }, [navigate]);
-
   const handleLogoutClick = () => {
     setShowLogoutModal(true);
   };
 
   const confirmLogout = () => {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     navigate('/login');
   };
 
@@ -33,6 +28,13 @@ export default function Dashboard() {
     if (!originalUrl) return;
 
     setError('');
+
+    const validationResult = urlSchema.safeParse({ url: originalUrl });
+    if (!validationResult.success) {
+      setError(validationResult.error.issues[0].message);
+      return;
+    }
+
     setLoading(true);
     setShortUrl('');
     setCopied(false);
@@ -40,14 +42,54 @@ export default function Dashboard() {
     const token = localStorage.getItem('access_token');
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/urls/shorten`, {
+      let currentToken = token;
+      let response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/urls/shorten`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${currentToken}`
         },
         body: JSON.stringify({ originalUrl })
       });
+
+      if (response.status === 401) {
+        const refreshToken = localStorage.getItem('refresh_token');
+        if (refreshToken) {
+          try {
+            const refreshRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/refresh-token`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ refresh_token: refreshToken })
+            });
+            if (refreshRes.ok) {
+              const refreshData = await refreshRes.json();
+              localStorage.setItem('access_token', refreshData.access_token);
+              currentToken = refreshData.access_token;
+              
+              // Retry original request
+              response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/urls/shorten`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${currentToken}`
+                },
+                body: JSON.stringify({ originalUrl })
+              });
+            } else {
+              localStorage.removeItem('access_token');
+              localStorage.removeItem('refresh_token');
+              navigate('/login');
+              return;
+            }
+          } catch (e) {
+            console.error('Failed to refresh token', e);
+          }
+        } else {
+          localStorage.removeItem('access_token');
+          navigate('/login');
+          return;
+        }
+      }
 
       const data = await response.json();
 
@@ -139,6 +181,7 @@ export default function Dashboard() {
           transition={{ duration: 0.5, delay: 0.2 }}
           onSubmit={handleShorten} 
           className="w-full mb-8"
+          noValidate
         >
           <div className="relative flex items-center shadow-[0_20px_60px_rgba(0,0,0,0.3)] rounded-2xl bg-white/5 backdrop-blur-xl p-2 border border-white/10 focus-within:border-blue-500/50 focus-within:bg-white/10 transition-all group">
             <Link2 className="absolute left-6 text-gray-400 w-6 h-6 group-focus-within:text-blue-400 transition-colors" />
@@ -161,9 +204,9 @@ export default function Dashboard() {
             </motion.button>
           </div>
           {error && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-400 mt-4 text-center text-sm font-medium">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-400 mt-4 text-center text-sm font-medium">
               {error}
-            </motion.div>
+            </motion.p>
           )}
         </motion.form>
 
