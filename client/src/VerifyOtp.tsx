@@ -104,7 +104,7 @@ export default function VerifyOtp() {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 1.05 }}
         transition={{ duration: 0.4 }}
-        className="min-h-screen bg-[#0f172a] flex items-center justify-center p-4 selection:bg-blue-500/30 font-sans"
+        className="min-h-screen bg-[#030014] flex items-center justify-center p-4 selection:bg-fuchsia-500/30 font-sans"
       >
         <motion.div 
           initial={{ y: 50, opacity: 0 }}
@@ -117,7 +117,7 @@ export default function VerifyOtp() {
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", bounce: 0.6 }}
           >
-            <CheckCircle size={64} className="text-green-500 mx-auto mb-6 drop-shadow-md" />
+            <CheckCircle size={64} className="text-teal-500 mx-auto mb-6 drop-shadow-md" />
           </motion.div>
           <h2 className="text-3xl font-bold mb-3 text-gray-900 tracking-tight">Account Verified!</h2>
           <p className="text-gray-500 mb-8 font-medium">
@@ -142,7 +142,7 @@ export default function VerifyOtp() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="min-h-screen bg-[#0f172a] text-white flex overflow-hidden font-sans selection:bg-blue-500/30"
+      className="min-h-screen bg-[#030014] text-white flex overflow-hidden font-sans selection:bg-fuchsia-500/30"
     >
       
       {/* Left Animated Section */}
@@ -151,12 +151,12 @@ export default function VerifyOtp() {
         <motion.div 
           animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[20%] left-[20%] w-[400px] h-[400px] bg-green-500/20 rounded-full blur-[100px]"
+          className="absolute top-[20%] left-[20%] w-[400px] h-[400px] bg-teal-500/20 rounded-full blur-[100px]"
         />
         <motion.div 
           animate={{ scale: [1, 1.5, 1], x: [0, 100, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[10%] right-[10%] w-[300px] h-[300px] bg-emerald-500/20 rounded-full blur-[100px]"
+          className="absolute bottom-[10%] right-[10%] w-[300px] h-[300px] bg-cyan-500/20 rounded-full blur-[100px]"
         />
         
         {/* Floating Elements Composition */}
@@ -172,94 +172,103 @@ export default function VerifyOtp() {
               transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 2 }}
               className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg]"
             />
-            <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(16,185,129,0.5)]">
+            <div className="w-20 h-20 bg-gradient-to-br from-teal-400 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(6,182,212,0.5)]">
               <ShieldCheck className="w-10 h-10 text-white" />
             </div>
             <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">Verify</h2>
-            <p className="text-emerald-200/80 mt-2 font-medium">Identity Check</p>
+            <p className="text-cyan-200/80 mt-2 font-medium">Identity Check</p>
           </motion.div>
         </div>
       </div>
 
       {/* Right Form Section */}
-      <div className="w-full lg:w-[45%] flex items-center justify-center p-8 bg-white text-gray-900 relative rounded-l-[2.5rem] shadow-[-20px_0_60px_rgba(0,0,0,0.5)] z-40">
-        <div className="w-full max-w-[380px]">
+      <div className="w-full lg:w-[45%] flex items-center justify-center p-4 sm:p-8 lg:p-0 relative z-40 min-h-screen">
+        <div className="w-full max-w-[420px] lg:max-w-none bg-white/5 lg:bg-white/5 backdrop-blur-2xl lg:backdrop-blur-2xl text-white p-8 sm:p-10 lg:p-12 rounded-[2.5rem] lg:rounded-none lg:rounded-l-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] lg:h-full lg:flex lg:flex-col lg:justify-center border border-white/10 relative overflow-hidden">
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-8 text-center"
-          >
-            <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-              <Mail className="w-8 h-8 text-emerald-600" />
+          {/* Subtle Mobile Inner Gradient */}
+          <div className="lg:hidden absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-cyan-500/10 to-transparent pointer-events-none"></div>
+
+          <div className="w-full lg:max-w-[380px] mx-auto relative z-10">
+          
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, type: "spring", bounce: 0.5 }} className="mb-8 text-center">
+            <div className="w-16 h-16 bg-cyan-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm border border-cyan-500/30">
+              <Mail className="w-8 h-8 text-cyan-400" />
             </div>
-            <h1 className="text-3xl font-bold mb-2 tracking-tight">Check your email</h1>
-            <p className="text-gray-500 text-sm">
-              We sent a 6-digit code to <br/><b className="text-gray-900 font-bold">{email || 'your email'}</b>
+            <h1 className="text-3xl font-bold mb-2 tracking-tight">Check Your Email</h1>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              We've sent a 6-digit verification code to <span className="font-semibold text-cyan-400">{email}</span>.
             </p>
           </motion.div>
 
-          <motion.form 
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-            onSubmit={handleSubmit} 
-            className="flex flex-col gap-5"
-          >
-            {error && (
-              <motion.div variants={itemVariants} className="bg-red-50 text-red-600 text-sm p-3 rounded-xl border border-red-100 text-center flex items-center justify-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-                {error}
-              </motion.div>
-            )}
+          <motion.form variants={containerVariants} initial="hidden" animate="show" onSubmit={handleSubmit} className="flex flex-col gap-5">
+            {error && <motion.div variants={itemVariants} className="bg-red-500/10 text-red-400 text-sm p-3 rounded-xl border border-red-500/20 text-center">{error}</motion.div>}
 
-            <motion.div variants={itemVariants} className="mb-2">
-              <input 
-                type="text" 
-                maxLength={6}
-                className={`w-full py-4 text-center text-4xl font-bold tracking-[0.5em] border-2 ${fieldError ? 'border-red-200 bg-red-50 focus:border-red-500' : 'border-gray-100 bg-gray-50 focus:border-emerald-500 focus:bg-white'} rounded-xl outline-none transition-all font-mono`}
-                placeholder="••••••" 
-                value={otp}
-                onChange={(e) => {
-                  setOtp(e.target.value);
-                  if (fieldError) setFieldError('');
-                }}
-              />
-              {fieldError && <p className="text-red-500 text-xs text-center mt-2">{fieldError}</p>}
+            <motion.div variants={itemVariants} className="flex justify-between gap-3 sm:gap-4 mb-2">
+                {otp.map((digit, index) => (
+                  <input
+                    key={index}
+                    ref={(el) => inputRefs.current[index] = el}
+                    type="text"
+                    maxLength={1}
+                    value={digit}
+                    onChange={(e) => handleOtpChange(index, e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(index, e)}
+                    className={`w-12 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-xl border-2 outline-none transition-all ${
+                      error 
+                        ? 'border-red-400/50 bg-red-400/10 text-white focus:border-red-500' 
+                        : digit 
+                          ? 'border-cyan-500/50 bg-cyan-500/10 text-cyan-400' 
+                          : 'border-white/10 bg-white/5 text-white focus:border-cyan-500/50 focus:bg-white/10'
+                    }`}
+                  />
+                ))}
             </motion.div>
 
             <motion.button 
               variants={itemVariants}
-              whileHover={{ scale: 1.01 }}
+              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(6,182,212,0.4)" }}
               whileTap={{ scale: 0.98 }}
               type="submit" 
               disabled={loading || otpTimeLeft === 0}
-              className="w-full py-4 mt-2 bg-emerald-600 text-white rounded-xl text-sm font-bold hover:bg-emerald-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 group shadow-xl shadow-emerald-600/20"
+              className="w-full py-4 mt-2 bg-cyan-600 text-white rounded-xl text-sm font-bold hover:bg-cyan-700 transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 group shadow-xl shadow-cyan-600/20 relative overflow-hidden"
             >
-              {loading ? 'Verifying...' : otpTimeLeft === 0 ? 'Code Expired' : 'Verify Code'}
-              {!loading && otpTimeLeft > 0 && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+              {loading ? (
+                <motion.div 
+                  animate={{ rotate: 360 }} 
+                  transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                  className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                />
+              ) : otpTimeLeft === 0 ? 'Code Expired' : (
+                <>
+                  Verify Code
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
             </motion.button>
             
             {resendMessage && (
-              <motion.div variants={itemVariants} className="bg-emerald-50 text-emerald-600 text-sm p-3 rounded-xl border border-emerald-100 text-center flex items-center justify-center gap-2">
-                <CheckCircle className="w-4 h-4 text-emerald-500" />
+              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-4 p-3 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm rounded-xl text-center flex items-center justify-center gap-2 font-medium">
+                <CheckCircle2 className="w-4 h-4" />
                 {resendMessage}
               </motion.div>
             )}
-
-            <motion.div variants={itemVariants} className="text-center text-sm text-gray-500 mt-4">
-              Didn't receive the code?{' '}
-              <button 
-                type="button" 
-                onClick={handleResend}
-                disabled={resendLoading || resendCooldown > 0}
-                className="text-emerald-600 font-bold hover:underline ml-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:no-underline"
-              >
-                {resendLoading ? 'Resending...' : resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend it'}
-              </button>
+            
+            <motion.div variants={itemVariants} className="text-center text-sm text-gray-400 mt-6 flex flex-col items-center gap-2">
+              <p>
+                Didn't receive the code? 
+                <button type="button" onClick={handleResend} disabled={resending || otpTimeLeft > 0} className={`ml-1 font-bold transition-colors ${otpTimeLeft > 0 ? 'text-gray-600 cursor-not-allowed' : 'text-cyan-400 hover:underline'}`}>
+                  {resending ? 'Sending...' : 'Resend Code'}
+                </button>
+              </p>
+              {otpTimeLeft > 0 && (
+                <div className="flex items-center gap-1.5 text-gray-400 bg-white/5 px-3 py-1 rounded-full text-xs font-medium border border-white/10">
+                  <Clock className="w-3 h-3" />
+                  Code expires in {Math.floor(otpTimeLeft / 60)}:{(otpTimeLeft % 60).toString().padStart(2, '0')}
+                </div>
+              )}
             </motion.div>
           </motion.form>
+          </div>
         </div>
       </div>
     </motion.div>
