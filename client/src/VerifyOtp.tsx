@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Mail, CheckCircle, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Mail, CheckCircle, ArrowRight, ShieldCheck, Clock } from 'lucide-react';
 import { verifySchema } from './validation';
 import { authService } from './services/authService';
 import { motion, type Variants } from 'framer-motion';
@@ -203,25 +203,19 @@ export default function VerifyOtp() {
           <motion.form variants={containerVariants} initial="hidden" animate="show" onSubmit={handleSubmit} className="flex flex-col gap-5">
             {error && <motion.div variants={itemVariants} className="bg-red-500/10 text-red-400 text-sm p-3 rounded-xl border border-red-500/20 text-center">{error}</motion.div>}
 
-            <motion.div variants={itemVariants} className="flex justify-between gap-3 sm:gap-4 mb-2">
-                {otp.map((digit, index) => (
-                  <input
-                    key={index}
-                    ref={(el) => inputRefs.current[index] = el}
-                    type="text"
-                    maxLength={1}
-                    value={digit}
-                    onChange={(e) => handleOtpChange(index, e.target.value)}
-                    onKeyDown={(e) => handleKeyDown(index, e)}
-                    className={`w-12 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-xl border-2 outline-none transition-all ${
-                      error 
-                        ? 'border-red-400/50 bg-red-400/10 text-white focus:border-red-500' 
-                        : digit 
-                          ? 'border-cyan-500/50 bg-cyan-500/10 text-cyan-400' 
-                          : 'border-white/10 bg-white/5 text-white focus:border-cyan-500/50 focus:bg-white/10'
-                    }`}
-                  />
-                ))}
+            <motion.div variants={itemVariants} className="mb-2">
+              <input 
+                type="text" 
+                maxLength={6}
+                className={`w-full py-4 text-center text-4xl font-bold tracking-[0.5em] border-2 ${fieldError ? 'border-red-400/50 bg-red-400/10 text-white focus:border-red-500' : 'border-white/10 bg-white/5 text-white focus:border-cyan-500/50 focus:bg-white/10'} rounded-xl outline-none transition-all font-mono`}
+                placeholder="••••••" 
+                value={otp}
+                onChange={(e) => {
+                  setOtp(e.target.value);
+                  if (fieldError) setFieldError('');
+                }}
+              />
+              {fieldError && <p className="text-red-400 text-xs text-center mt-2">{fieldError}</p>}
             </motion.div>
 
             <motion.button 
@@ -248,7 +242,7 @@ export default function VerifyOtp() {
             
             {resendMessage && (
               <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-4 p-3 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm rounded-xl text-center flex items-center justify-center gap-2 font-medium">
-                <CheckCircle2 className="w-4 h-4" />
+                <CheckCircle className="w-4 h-4" />
                 {resendMessage}
               </motion.div>
             )}
@@ -256,8 +250,8 @@ export default function VerifyOtp() {
             <motion.div variants={itemVariants} className="text-center text-sm text-gray-400 mt-6 flex flex-col items-center gap-2">
               <p>
                 Didn't receive the code? 
-                <button type="button" onClick={handleResend} disabled={resending || otpTimeLeft > 0} className={`ml-1 font-bold transition-colors ${otpTimeLeft > 0 ? 'text-gray-600 cursor-not-allowed' : 'text-cyan-400 hover:underline'}`}>
-                  {resending ? 'Sending...' : 'Resend Code'}
+                <button type="button" onClick={handleResend} disabled={resendLoading || otpTimeLeft > 0} className={`ml-1 font-bold transition-colors ${otpTimeLeft > 0 ? 'text-gray-600 cursor-not-allowed' : 'text-cyan-400 hover:underline'}`}>
+                  {resendLoading ? 'Sending...' : 'Resend Code'}
                 </button>
               </p>
               {otpTimeLeft > 0 && (
