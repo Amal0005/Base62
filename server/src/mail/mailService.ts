@@ -1,35 +1,33 @@
 import { Injectable, Logger } from '@nestjs/common';
-import * as nodemailer from 'nodemailer';
 
 @Injectable()
 export class MailService {
-  private transporter: nodemailer.Transporter;
   private readonly logger = new Logger(MailService.name);
-
-  constructor() {
-    this.transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.ethereal.email',
-      port: parseInt(process.env.SMTP_PORT || '587', 10),
-      secure: process.env.SMTP_PORT === '465',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-  }
+  private readonly resendApiKey = process.env.RESEND_API_KEY as string;
 
   async sendOtpEmail(to: string, otp: string): Promise<void> {
     try {
-      const mailOptions = {
-        from: `"Base62 Admin" <${process.env.SMTP_USER}>`,
-        to,
-        subject: 'Your One-Time Password (OTP)',
-        text: `Your OTP is ${otp}. It will expire in 10 minutes.`,
-        html: `<p>Your OTP is <b>${otp}</b>. It will expire in 10 minutes.</p>`,
-      };
+      const response = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.resendApiKey}`
+        },
+        body: JSON.stringify({
+          from: 'Base62 Admin <onboarding@resend.dev>',
+          to: [to],
+          subject: 'Your One-Time Password (OTP)',
+          html: `<p>Your OTP is <b>${otp}</b>. It will expire in 10 minutes.</p>`,
+        })
+      });
 
-      const info = await this.transporter.sendMail(mailOptions);
-      this.logger.log(`Message sent: ${info.messageId}`);
+      if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(`Resend API Error: ${errorData}`);
+      }
+
+      const data = await response.json();
+      this.logger.log(`Message sent via Resend: ${data.id}`);
     } catch (error) {
       this.logger.error('Error sending email', error);
       throw error;
