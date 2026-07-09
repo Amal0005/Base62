@@ -73,7 +73,7 @@ export default function Register() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="min-h-screen bg-transparent text-slate-900 flex flex-row-reverse overflow-hidden font-sans selection:bg-fuchsia-500/30"
+      className="min-h-screen bg-transparent text-slate-900 flex flex-row-reverse overflow-hidden font-sans selection:bg-yellow-500/30"
     >
       
 
@@ -95,7 +95,7 @@ export default function Register() {
               transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 2 }}
               className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[-20deg]"
             />
-            <div className="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_10px_30px_rgba(99,102,241,0.3)]">
+            <div className="w-20 h-20 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_10px_30px_rgba(234,179,8,0.3)]">
               <ShieldCheck className="w-10 h-10 text-white" />
             </div>
             <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600">Secure</h2>
@@ -120,15 +120,15 @@ export default function Register() {
             className="absolute bottom-12 left-4 w-56 h-36 bg-white/60 backdrop-blur-xl rounded-2xl border border-slate-200 p-5 flex flex-col justify-between z-30 shadow-xl shadow-slate-200/50"
           >
             <div className="flex justify-between items-center">
-              <Activity className="text-purple-500 w-6 h-6" />
-              <span className="text-xs font-bold text-purple-600">99.9% Uptime</span>
+              <Activity className="text-amber-500 w-6 h-6" />
+              <span className="text-xs font-bold text-amber-600">99.9% Uptime</span>
             </div>
             <div>
               <div className="flex items-end gap-1 mb-2 h-10">
                 <div className="w-full bg-slate-200 rounded-t-sm h-[40%]"></div>
                 <div className="w-full bg-slate-300 rounded-t-sm h-[70%]"></div>
                 <div className="w-full bg-slate-400 rounded-t-sm h-[50%]"></div>
-                <div className="w-full bg-purple-400 rounded-t-sm h-[100%]"></div>
+                <div className="w-full bg-amber-400 rounded-t-sm h-[100%]"></div>
                 <div className="w-full bg-slate-300 rounded-t-sm h-[80%]"></div>
               </div>
               <div className="h-1.5 w-full bg-slate-200 rounded-full"></div>
@@ -142,7 +142,7 @@ export default function Register() {
         <div className="w-full max-w-[420px] lg:max-w-none bg-white/70 lg:bg-white/70 backdrop-blur-2xl lg:backdrop-blur-2xl text-slate-900 p-8 sm:p-10 lg:p-12 rounded-[2.5rem] lg:rounded-none lg:rounded-r-[2.5rem] shadow-[0_0_40px_rgba(0,0,0,0.05)] lg:h-full lg:flex lg:flex-col lg:justify-center border border-slate-200/60 relative overflow-hidden">
           
           {/* Subtle Mobile Inner Gradient */}
-          <div className="lg:hidden absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-violet-500/5 to-transparent pointer-events-none"></div>
+          <div className="lg:hidden absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-yellow-500/5 to-transparent pointer-events-none"></div>
 
           <div className="w-full lg:max-w-[380px] mx-auto relative z-10">
           
@@ -152,8 +152,8 @@ export default function Register() {
             transition={{ duration: 0.7, type: "spring", bounce: 0.5 }}
             className="mb-8"
           >
-            <div className="lg:hidden w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center mb-6 shadow-sm border border-violet-200">
-              <Link className="w-6 h-6 text-violet-600" />
+            <div className="lg:hidden w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mb-6 shadow-sm border border-yellow-200">
+              <Link className="w-6 h-6 text-yellow-600" />
             </div>
             <h1 className="text-3xl font-bold mb-2 tracking-tight">Create Account</h1>
             <p className="text-slate-500 text-sm">Sign up to start shortening your links today.</p>
@@ -176,11 +176,11 @@ export default function Register() {
             <motion.div variants={itemVariants}>
               <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Full Name</label>
               <div className="relative flex items-center group">
-                <User className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.name ? 'text-red-500' : 'text-slate-400 group-focus-within:text-violet-500'}`} />
+                <User className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.name ? 'text-red-500' : 'text-slate-400 group-focus-within:text-yellow-500'}`} />
                 <input 
                   type="text" 
                   name="name"
-                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.name ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
+                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.name ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
                   placeholder="John Doe" 
                   value={formData.name}
                   onChange={handleChange}
@@ -192,11 +192,11 @@ export default function Register() {
             <motion.div variants={itemVariants}>
               <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Email Address</label>
               <div className="relative flex items-center group">
-                <Mail className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.email ? 'text-red-500' : 'text-slate-400 group-focus-within:text-violet-500'}`} />
+                <Mail className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.email ? 'text-red-500' : 'text-slate-400 group-focus-within:text-yellow-500'}`} />
                 <input 
                   type="email" 
                   name="email"
-                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.email ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
+                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.email ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
                   placeholder="you@company.com" 
                   value={formData.email}
                   onChange={handleChange}
@@ -208,11 +208,11 @@ export default function Register() {
             <motion.div variants={itemVariants}>
               <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Password</label>
               <div className="relative flex items-center group">
-                <Lock className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.password ? 'text-red-500' : 'text-slate-400 group-focus-within:text-violet-500'}`} />
+                <Lock className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.password ? 'text-red-500' : 'text-slate-400 group-focus-within:text-yellow-500'}`} />
                 <input 
                   type="password" 
                   name="password"
-                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.password ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
+                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.password ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
                   placeholder="Create a password" 
                   value={formData.password}
                   onChange={handleChange}
@@ -224,11 +224,11 @@ export default function Register() {
             <motion.div variants={itemVariants}>
               <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Confirm Password</label>
               <div className="relative flex items-center group">
-                <ShieldCheck className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.confirmPassword ? 'text-red-500' : 'text-slate-400 group-focus-within:text-violet-500'}`} />
+                <ShieldCheck className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.confirmPassword ? 'text-red-500' : 'text-slate-400 group-focus-within:text-yellow-500'}`} />
                 <input 
                   type="password" 
                   name="confirmPassword"
-                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.confirmPassword ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
+                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.confirmPassword ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
                   placeholder="Repeat your password" 
                   value={formData.confirmPassword}
                   onChange={handleChange}
@@ -239,11 +239,11 @@ export default function Register() {
 
             <motion.button 
               variants={itemVariants}
-              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(139,92,246,0.4)" }}
+              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(234,179,8,0.4)" }}
               whileTap={{ scale: 0.98 }}
               type="submit" 
               disabled={loading}
-              className="w-full py-3.5 mt-2 bg-violet-600 text-white rounded-xl text-sm font-bold hover:bg-violet-700 transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 group shadow-xl shadow-violet-600/20 relative overflow-hidden"
+              className="w-full py-3.5 mt-2 bg-yellow-500 text-white rounded-xl text-sm font-bold hover:bg-yellow-400 transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 group shadow-xl shadow-yellow-500/20 relative overflow-hidden"
             >
               {loading ? (
                 <motion.div 

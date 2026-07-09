@@ -25,7 +25,7 @@ export default function AnimatedBackground() {
   }, [mouseX, mouseY]);
 
   return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-slate-50 selection:bg-fuchsia-500/30">
+    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-white selection:bg-yellow-500/30">
       
       {/* Base Noise Texture */}
       <div className="absolute inset-0 z-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.06] mix-blend-overlay"></div>
@@ -34,7 +34,7 @@ export default function AnimatedBackground() {
         <>
           {/* Interactive Mouse Spotlight */}
           <motion.div
-            className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full bg-fuchsia-400/15 blur-[120px] -translate-x-1/2 -translate-y-1/2"
+            className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full bg-yellow-400/15 blur-[120px] -translate-x-1/2 -translate-y-1/2"
             style={{
               x: springX,
               y: springY,
@@ -50,7 +50,7 @@ export default function AnimatedBackground() {
               y: [0, 30, 0]
             }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-fuchsia-400/25 rounded-full blur-[120px]"
+            className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-yellow-400/25 rounded-full blur-[120px]"
           />
 
           {/* Primary Gradient Orb 2 */}
@@ -62,7 +62,7 @@ export default function AnimatedBackground() {
               rotate: [0, -90, 0]
             }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-violet-400/25 rounded-full blur-[130px]"
+            className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-amber-400/25 rounded-full blur-[130px]"
           />
 
           {/* Floating Accent Particles */}
@@ -83,7 +83,7 @@ export default function AnimatedBackground() {
                 repeat: Infinity,
                 ease: "linear",
               }}
-              className="absolute w-1.5 h-1.5 rounded-full bg-violet-400/50 blur-[1px]"
+              className="absolute w-1.5 h-1.5 rounded-full bg-amber-400/50 blur-[1px]"
             />
           ))}
         </>

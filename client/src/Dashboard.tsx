@@ -118,7 +118,7 @@ export default function Dashboard() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-transparent text-slate-900 flex flex-col font-sans selection:bg-fuchsia-500/30 overflow-hidden relative"
+      className="min-h-screen bg-transparent text-slate-900 flex flex-col font-sans selection:bg-yellow-500/30 overflow-hidden relative"
     >
 
 
@@ -130,8 +130,8 @@ export default function Dashboard() {
         className="px-8 py-4 flex items-center justify-between relative z-20 border-b border-slate-200 bg-white/70 backdrop-blur-xl shadow-sm"
       >
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-fuchsia-100 rounded-xl flex items-center justify-center shadow-sm border border-fuchsia-200">
-            <Link className="w-5 h-5 text-fuchsia-600" />
+          <div className="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center shadow-sm border border-yellow-200">
+            <Link className="w-5 h-5 text-yellow-600" />
           </div>
           <span className="text-xl font-bold tracking-tight text-slate-900">Base62</span>
         </div>
@@ -158,7 +158,7 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-100 text-fuchsia-600 text-xs font-bold tracking-wide border border-fuchsia-200 mb-6 shadow-sm"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-600 text-xs font-bold tracking-wide border border-yellow-200 mb-6 shadow-sm"
           >
             <Activity size={14} /> ACTIVE WORKSPACE
           </motion.div>
@@ -180,9 +180,9 @@ export default function Dashboard() {
         >
           <motion.div 
             whileHover={{ scale: 1.01 }}
-            className="relative flex items-center shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-2xl bg-white/80 backdrop-blur-xl p-2 border border-slate-200 focus-within:border-fuchsia-400 focus-within:bg-white focus-within:shadow-md transition-all duration-300 group"
+            className="relative flex items-center shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-2xl bg-white/80 backdrop-blur-xl p-2 border border-slate-200 focus-within:border-yellow-400 focus-within:bg-white focus-within:shadow-md transition-all duration-300 group"
           >
-            <Link2 className="absolute left-4 md:left-6 text-slate-400 w-5 h-5 md:w-6 md:h-6 group-focus-within:text-fuchsia-500 transition-colors" />
+            <Link2 className="absolute left-4 md:left-6 text-slate-400 w-5 h-5 md:w-6 md:h-6 group-focus-within:text-yellow-500 transition-colors" />
             <input 
               type="url" 
               value={originalUrl}
@@ -192,11 +192,11 @@ export default function Dashboard() {
               required
             />
             <motion.button 
-              whileHover={{ scale: 1.03, boxShadow: "0 0 25px rgba(37,99,235,0.6)" }}
+              whileHover={{ scale: 1.03, boxShadow: "0 0 25px rgba(234,179,8,0.6)" }}
               whileTap={{ scale: 0.95 }}
               type="submit" 
               disabled={loading}
-              className="absolute right-2 md:right-3 py-2 md:py-3 px-4 md:px-8 bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white rounded-xl font-bold text-sm md:text-base hover:from-fuchsia-500 hover:to-violet-500 transition-all disabled:opacity-70 flex justify-center shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+              className="absolute right-2 md:right-3 py-2 md:py-3 px-4 md:px-8 bg-gradient-to-r from-yellow-500 to-amber-600 text-white rounded-xl font-bold text-sm md:text-base hover:from-yellow-400 hover:to-amber-500 transition-all disabled:opacity-70 flex justify-center shadow-[0_0_20px_rgba(234,179,8,0.4)]"
             >
               {loading ? (
                 <motion.div 
@@ -230,12 +230,12 @@ export default function Dashboard() {
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
                 className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/80 to-transparent skew-x-[-20deg]"
               />
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-400 via-violet-500 to-purple-500"></div>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-500"></div>
               
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Your Short URL</p>
-                  <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="text-2xl font-bold text-fuchsia-600 truncate hover:text-fuchsia-500 transition-colors flex items-center gap-2 group">
+                  <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="text-2xl font-bold text-yellow-600 truncate hover:text-yellow-500 transition-colors flex items-center gap-2 group">
                     {shortUrl}
                     <ExternalLink size={20} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
