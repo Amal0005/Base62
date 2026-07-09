@@ -4,10 +4,11 @@ import { Injectable, Logger } from '@nestjs/common';
 export class MailService {
   private readonly logger = new Logger(MailService.name);
   private readonly resendApiKey = process.env.RESEND_API_KEY as string;
+  private readonly resendApiUrl = process.env.RESEND_API_URL as string;
 
   async sendOtpEmail(to: string, otp: string): Promise<void> {
     try {
-      const response = await fetch('https://api.resend.com/emails', {
+      const response = await fetch(this.resendApiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

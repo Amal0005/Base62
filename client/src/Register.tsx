@@ -73,38 +73,10 @@ export default function Register() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="min-h-screen bg-[#030014] text-white flex flex-row-reverse overflow-hidden font-sans selection:bg-fuchsia-500/30"
+      className="min-h-screen bg-transparent text-slate-900 flex flex-row-reverse overflow-hidden font-sans selection:bg-fuchsia-500/30"
     >
       
-      {/* Shared Animated Background */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none">
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], rotate: [0, -90, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-5%] lg:top-[20%] right-[-10%] lg:right-[20%] w-[350px] lg:w-[400px] h-[350px] lg:h-[400px] bg-violet-500/30 lg:bg-violet-500/20 rounded-full blur-[80px] lg:blur-[100px]"
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.5, 1], x: [0, -50, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[-5%] lg:bottom-[10%] left-[-10%] lg:left-[10%] w-[300px] lg:w-[300px] h-[300px] lg:h-[300px] bg-fuchsia-500/30 lg:bg-fuchsia-500/20 rounded-full blur-[80px] lg:blur-[100px]"
-        />
-        
-        {/* Mobile Floating Elements */}
-        <motion.div 
-          animate={{ y: [0, -20, 0], rotate: [0, -10, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="lg:hidden absolute top-12 left-6 w-16 h-16 bg-gradient-to-br from-violet-500/20 to-purple-500/20 backdrop-blur-md rounded-2xl border border-white/10 shadow-lg flex items-center justify-center"
-        >
-          <ShieldCheck className="text-violet-300 w-8 h-8 opacity-80" />
-        </motion.div>
-        <motion.div 
-          animate={{ y: [0, 20, 0], rotate: [0, 15, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="lg:hidden absolute bottom-12 right-4 w-20 h-20 bg-gradient-to-br from-fuchsia-400/20 to-violet-500/20 backdrop-blur-md rounded-[1.5rem] border border-white/10 shadow-lg flex items-center justify-center"
-        >
-          <Activity className="text-fuchsia-300 w-10 h-10 opacity-80" />
-        </motion.div>
-      </div>
+
 
       {/* Right Animated Section (Reversed for Register) */}
       <div className="hidden lg:flex w-[55%] relative items-center justify-center p-12 z-10">
@@ -116,50 +88,50 @@ export default function Register() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="absolute inset-0 m-auto w-64 h-64 bg-white/5 backdrop-blur-2xl rounded-[2rem] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.4)] flex flex-col items-center justify-center z-20 overflow-hidden"
+            className="absolute inset-0 m-auto w-64 h-64 bg-white/70 backdrop-blur-2xl rounded-[2rem] border border-slate-200 shadow-[0_20px_60px_rgba(0,0,0,0.05)] flex flex-col items-center justify-center z-20 overflow-hidden"
           >
             <motion.div 
               animate={{ x: ['-100%', '200%'] }}
               transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 2 }}
-              className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg]"
+              className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[-20deg]"
             />
-            <div className="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(99,102,241,0.5)]">
+            <div className="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_10px_30px_rgba(99,102,241,0.3)]">
               <ShieldCheck className="w-10 h-10 text-white" />
             </div>
-            <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">Secure</h2>
-            <p className="text-indigo-200/80 mt-2 font-medium">Enterprise Grade</p>
+            <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600">Secure</h2>
+            <p className="text-slate-500 mt-2 font-medium">Enterprise Grade</p>
           </motion.div>
 
           <motion.div 
             animate={{ y: [-15, 15, -15], rotate: [2, -2, 2] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-12 right-4 w-48 h-32 bg-gradient-to-br from-fuchsia-500/20 to-violet-600/20 backdrop-blur-xl rounded-2xl border border-white/10 p-5 flex flex-col justify-between z-10 shadow-xl"
+            className="absolute top-12 right-4 w-48 h-32 bg-white/60 backdrop-blur-xl rounded-2xl border border-slate-200 p-5 flex flex-col justify-between z-10 shadow-xl shadow-slate-200/50"
           >
-            <Zap className="text-yellow-400 w-6 h-6" />
+            <Zap className="text-yellow-500 w-6 h-6" />
             <div>
-              <div className="h-2 w-20 bg-white/30 rounded-full mb-2"></div>
-              <div className="h-2 w-12 bg-white/30 rounded-full"></div>
+              <div className="h-2 w-20 bg-slate-300 rounded-full mb-2"></div>
+              <div className="h-2 w-12 bg-slate-300 rounded-full"></div>
             </div>
           </motion.div>
 
           <motion.div 
             animate={{ y: [15, -15, 15], rotate: [-2, 2, -2] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-12 left-4 w-56 h-36 bg-gradient-to-br from-violet-400/20 to-purple-500/20 backdrop-blur-xl rounded-2xl border border-white/10 p-5 flex flex-col justify-between z-30 shadow-xl"
+            className="absolute bottom-12 left-4 w-56 h-36 bg-white/60 backdrop-blur-xl rounded-2xl border border-slate-200 p-5 flex flex-col justify-between z-30 shadow-xl shadow-slate-200/50"
           >
             <div className="flex justify-between items-center">
-              <Activity className="text-purple-300 w-6 h-6" />
-              <span className="text-xs font-bold text-purple-200">99.9% Uptime</span>
+              <Activity className="text-purple-500 w-6 h-6" />
+              <span className="text-xs font-bold text-purple-600">99.9% Uptime</span>
             </div>
             <div>
               <div className="flex items-end gap-1 mb-2 h-10">
-                <div className="w-full bg-white/20 rounded-t-sm h-[40%]"></div>
-                <div className="w-full bg-white/30 rounded-t-sm h-[70%]"></div>
-                <div className="w-full bg-white/50 rounded-t-sm h-[50%]"></div>
-                <div className="w-full bg-purple-400/80 rounded-t-sm h-[100%]"></div>
-                <div className="w-full bg-white/40 rounded-t-sm h-[80%]"></div>
+                <div className="w-full bg-slate-200 rounded-t-sm h-[40%]"></div>
+                <div className="w-full bg-slate-300 rounded-t-sm h-[70%]"></div>
+                <div className="w-full bg-slate-400 rounded-t-sm h-[50%]"></div>
+                <div className="w-full bg-purple-400 rounded-t-sm h-[100%]"></div>
+                <div className="w-full bg-slate-300 rounded-t-sm h-[80%]"></div>
               </div>
-              <div className="h-1.5 w-full bg-white/20 rounded-full"></div>
+              <div className="h-1.5 w-full bg-slate-200 rounded-full"></div>
             </div>
           </motion.div>
         </div>
@@ -167,10 +139,10 @@ export default function Register() {
 
       {/* Left Form Section */}
       <div className="w-full lg:w-[45%] flex items-center justify-center p-4 sm:p-8 lg:p-0 relative z-40 min-h-screen">
-        <div className="w-full max-w-[420px] lg:max-w-none bg-white/5 lg:bg-white/5 backdrop-blur-2xl lg:backdrop-blur-2xl text-white p-8 sm:p-10 lg:p-12 rounded-[2.5rem] lg:rounded-none lg:rounded-r-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] lg:h-full lg:flex lg:flex-col lg:justify-center border border-white/10 relative overflow-hidden">
+        <div className="w-full max-w-[420px] lg:max-w-none bg-white/70 lg:bg-white/70 backdrop-blur-2xl lg:backdrop-blur-2xl text-slate-900 p-8 sm:p-10 lg:p-12 rounded-[2.5rem] lg:rounded-none lg:rounded-r-[2.5rem] shadow-[0_0_40px_rgba(0,0,0,0.05)] lg:h-full lg:flex lg:flex-col lg:justify-center border border-slate-200/60 relative overflow-hidden">
           
           {/* Subtle Mobile Inner Gradient */}
-          <div className="lg:hidden absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-violet-500/10 to-transparent pointer-events-none"></div>
+          <div className="lg:hidden absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-violet-500/5 to-transparent pointer-events-none"></div>
 
           <div className="w-full lg:max-w-[380px] mx-auto relative z-10">
           
@@ -180,11 +152,11 @@ export default function Register() {
             transition={{ duration: 0.7, type: "spring", bounce: 0.5 }}
             className="mb-8"
           >
-            <div className="lg:hidden w-12 h-12 bg-violet-500/20 rounded-xl flex items-center justify-center mb-6 shadow-lg border border-violet-500/30">
-              <Link className="w-6 h-6 text-violet-400" />
+            <div className="lg:hidden w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center mb-6 shadow-sm border border-violet-200">
+              <Link className="w-6 h-6 text-violet-600" />
             </div>
             <h1 className="text-3xl font-bold mb-2 tracking-tight">Create Account</h1>
-            <p className="text-gray-400 text-sm">Sign up to start shortening your links today.</p>
+            <p className="text-slate-500 text-sm">Sign up to start shortening your links today.</p>
           </motion.div>
 
           <motion.form 
@@ -202,13 +174,13 @@ export default function Register() {
             )}
 
             <motion.div variants={itemVariants}>
-              <label className="block text-[10px] font-bold text-gray-300 mb-1.5 uppercase tracking-wider">Full Name</label>
+              <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Full Name</label>
               <div className="relative flex items-center group">
-                <User className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.name ? 'text-red-400' : 'text-gray-400 group-focus-within:text-violet-400'}`} />
+                <User className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.name ? 'text-red-500' : 'text-slate-400 group-focus-within:text-violet-500'}`} />
                 <input 
                   type="text" 
                   name="name"
-                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.name ? 'border-red-400/50 bg-red-400/10 focus:border-red-500' : 'border-white/10 bg-white/5 focus:border-violet-500/50 focus:bg-white/10'} rounded-xl text-sm outline-none transition-all text-white placeholder:text-gray-500`}
+                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.name ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
                   placeholder="John Doe" 
                   value={formData.name}
                   onChange={handleChange}
@@ -218,13 +190,13 @@ export default function Register() {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <label className="block text-[10px] font-bold text-gray-300 mb-1.5 uppercase tracking-wider">Email Address</label>
+              <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Email Address</label>
               <div className="relative flex items-center group">
-                <Mail className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.email ? 'text-red-400' : 'text-gray-400 group-focus-within:text-violet-400'}`} />
+                <Mail className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.email ? 'text-red-500' : 'text-slate-400 group-focus-within:text-violet-500'}`} />
                 <input 
                   type="email" 
                   name="email"
-                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.email ? 'border-red-400/50 bg-red-400/10 focus:border-red-500' : 'border-white/10 bg-white/5 focus:border-violet-500/50 focus:bg-white/10'} rounded-xl text-sm outline-none transition-all text-white placeholder:text-gray-500`}
+                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.email ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
                   placeholder="you@company.com" 
                   value={formData.email}
                   onChange={handleChange}
@@ -234,13 +206,13 @@ export default function Register() {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <label className="block text-[10px] font-bold text-gray-300 mb-1.5 uppercase tracking-wider">Password</label>
+              <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Password</label>
               <div className="relative flex items-center group">
-                <Lock className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.password ? 'text-red-400' : 'text-gray-400 group-focus-within:text-violet-400'}`} />
+                <Lock className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.password ? 'text-red-500' : 'text-slate-400 group-focus-within:text-violet-500'}`} />
                 <input 
                   type="password" 
                   name="password"
-                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.password ? 'border-red-400/50 bg-red-400/10 focus:border-red-500' : 'border-white/10 bg-white/5 focus:border-violet-500/50 focus:bg-white/10'} rounded-xl text-sm outline-none transition-all text-white placeholder:text-gray-500`}
+                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.password ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
                   placeholder="Create a password" 
                   value={formData.password}
                   onChange={handleChange}
@@ -250,13 +222,13 @@ export default function Register() {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <label className="block text-[10px] font-bold text-gray-300 mb-1.5 uppercase tracking-wider">Confirm Password</label>
+              <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Confirm Password</label>
               <div className="relative flex items-center group">
-                <ShieldCheck className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.confirmPassword ? 'text-red-400' : 'text-gray-400 group-focus-within:text-violet-400'}`} />
+                <ShieldCheck className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.confirmPassword ? 'text-red-500' : 'text-slate-400 group-focus-within:text-violet-500'}`} />
                 <input 
                   type="password" 
                   name="confirmPassword"
-                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.confirmPassword ? 'border-red-400/50 bg-red-400/10 focus:border-red-500' : 'border-white/10 bg-white/5 focus:border-violet-500/50 focus:bg-white/10'} rounded-xl text-sm outline-none transition-all text-white placeholder:text-gray-500`}
+                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.confirmPassword ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
                   placeholder="Repeat your password" 
                   value={formData.confirmPassword}
                   onChange={handleChange}
@@ -287,8 +259,8 @@ export default function Register() {
               )}
             </motion.button>
 
-            <motion.div variants={itemVariants} className="text-center text-sm text-gray-400 mt-4">
-              Already have an account? <RouterLink to="/login" className="text-violet-400 font-bold hover:underline ml-1">Log In</RouterLink>
+            <motion.div variants={itemVariants} className="text-center text-sm text-slate-500 mt-4">
+              Already have an account? <RouterLink to="/login" className="text-violet-600 font-bold hover:underline ml-1">Log In</RouterLink>
             </motion.div>
             </motion.form>
           </div>

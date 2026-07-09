@@ -118,47 +118,27 @@ export default function Dashboard() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#0a0f1c] text-white flex flex-col font-sans selection:bg-fuchsia-500/30 overflow-hidden relative"
+      className="min-h-screen bg-transparent text-slate-900 flex flex-col font-sans selection:bg-fuchsia-500/30 overflow-hidden relative"
     >
-      {/* Dynamic Backgrounds */}
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.2, 1], 
-          rotate: [0, 90, 0],
-          opacity: [0.3, 0.5, 0.3] 
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-gradient-to-r from-fuchsia-600/20 to-violet-600/20 rounded-full blur-[120px] pointer-events-none"
-      />
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.5, 1], 
-          x: [0, -100, 0],
-          y: [0, 50, 0],
-          opacity: [0.2, 0.4, 0.2]
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-full blur-[120px] pointer-events-none"
-      />
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+
 
       {/* Navbar */}
       <motion.nav 
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 400, damping: 25, delay: 0.1 }}
-        className="px-8 py-4 flex items-center justify-between relative z-20 border-b border-white/5 bg-white/5 backdrop-blur-xl shadow-lg"
+        className="px-8 py-4 flex items-center justify-between relative z-20 border-b border-slate-200 bg-white/70 backdrop-blur-xl shadow-sm"
       >
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-fuchsia-500 rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(217,70,239,0.3)]">
-            <Link className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 bg-fuchsia-100 rounded-xl flex items-center justify-center shadow-sm border border-fuchsia-200">
+            <Link className="w-5 h-5 text-fuchsia-600" />
           </div>
-          <span className="text-xl font-bold tracking-tight text-white">Base62</span>
+          <span className="text-xl font-bold tracking-tight text-slate-900">Base62</span>
         </div>
         <div className="flex items-center gap-6">
           <button 
             onClick={handleLogoutClick}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors font-medium text-sm bg-white/5 px-4 py-2 rounded-lg hover:bg-white/10"
+            className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors font-medium text-sm bg-white/80 border border-slate-200 px-4 py-2 rounded-lg hover:bg-slate-50"
           >
             <LogOut size={16} /> Logout
           </button>
@@ -178,14 +158,14 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 text-fuchsia-400 text-xs font-semibold tracking-wide border border-fuchsia-500/20 mb-6 shadow-[0_0_15px_rgba(217,70,239,0.15)]"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-100 text-fuchsia-600 text-xs font-bold tracking-wide border border-fuchsia-200 mb-6 shadow-sm"
           >
             <Activity size={14} /> ACTIVE WORKSPACE
           </motion.div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 md:mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 md:mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-600">
             Shorten Your Links
           </h1>
-          <p className="text-base md:text-lg text-gray-400 max-w-xl mx-auto">
+          <p className="text-base md:text-lg text-slate-500 max-w-xl mx-auto">
             Create secure, trackable short URLs in a single click using our enterprise-grade routing engine.
           </p>
         </motion.div>
@@ -200,15 +180,15 @@ export default function Dashboard() {
         >
           <motion.div 
             whileHover={{ scale: 1.01 }}
-            className="relative flex items-center shadow-[0_20px_60px_rgba(0,0,0,0.4)] rounded-2xl bg-white/5 backdrop-blur-xl p-2 border border-white/10 focus-within:border-fuchsia-500/60 focus-within:bg-white/10 focus-within:shadow-[0_0_30px_rgba(217,70,239,0.3)] transition-all duration-300 group"
+            className="relative flex items-center shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-2xl bg-white/80 backdrop-blur-xl p-2 border border-slate-200 focus-within:border-fuchsia-400 focus-within:bg-white focus-within:shadow-md transition-all duration-300 group"
           >
-            <Link2 className="absolute left-4 md:left-6 text-gray-400 w-5 h-5 md:w-6 md:h-6 group-focus-within:text-fuchsia-400 transition-colors" />
+            <Link2 className="absolute left-4 md:left-6 text-slate-400 w-5 h-5 md:w-6 md:h-6 group-focus-within:text-fuchsia-500 transition-colors" />
             <input 
               type="url" 
               value={originalUrl}
               onChange={(e) => setOriginalUrl(e.target.value)}
               placeholder="Paste your long URL here..." 
-              className="w-full py-4 md:py-5 pr-28 md:pr-36 pl-12 md:pl-16 text-base md:text-lg outline-none rounded-xl bg-transparent text-white placeholder:text-gray-500"
+              className="w-full py-4 md:py-5 pr-28 md:pr-36 pl-12 md:pl-16 text-base md:text-lg outline-none rounded-xl bg-transparent text-slate-900 placeholder:text-slate-400"
               required
             />
             <motion.button 
@@ -242,20 +222,20 @@ export default function Dashboard() {
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
               exit={{ opacity: 0, y: -20, scale: 0.9 }}
               transition={{ type: "spring", bounce: 0.5, duration: 0.7 }}
-              className="w-full bg-white/10 backdrop-blur-3xl p-6 md:p-8 rounded-3xl border border-white/20 shadow-[0_30px_100px_rgba(0,0,0,0.5)] relative overflow-hidden"
+              className="w-full bg-white/80 backdrop-blur-3xl p-6 md:p-8 rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 relative overflow-hidden"
             >
               {/* Shimmer Effect */}
               <motion.div 
                 animate={{ x: ['-200%', '200%'] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
-                className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg]"
+                className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/80 to-transparent skew-x-[-20deg]"
               />
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-400 via-violet-500 to-purple-500"></div>
               
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Your Short URL</p>
-                  <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="text-2xl font-bold text-fuchsia-400 truncate hover:text-fuchsia-300 transition-colors flex items-center gap-2 group">
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Your Short URL</p>
+                  <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="text-2xl font-bold text-fuchsia-600 truncate hover:text-fuchsia-500 transition-colors flex items-center gap-2 group">
                     {shortUrl}
                     <ExternalLink size={20} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
@@ -267,8 +247,8 @@ export default function Dashboard() {
                   onClick={handleCopy}
                   className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-colors ${
                     copied 
-                      ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30' 
-                      : 'bg-white/10 text-white hover:bg-white/20 border border-white/10'
+                      ? 'bg-teal-50 text-teal-600 border border-teal-200' 
+                      : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200'
                   }`}
                 >
                   {copied ? (
@@ -296,25 +276,25 @@ export default function Dashboard() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="bg-[#030014] border border-white/10 p-6 rounded-2xl shadow-2xl max-w-sm w-full"
+              className="bg-white border border-slate-200 p-6 rounded-2xl shadow-2xl max-w-sm w-full"
             >
-              <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                <LogOut className="w-6 h-6 text-red-400" />
+              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4 mx-auto shadow-sm">
+                <LogOut className="w-6 h-6 text-red-600" />
               </div>
-              <h3 className="text-xl font-bold text-center mb-2 text-white">Sign Out</h3>
-              <p className="text-gray-400 text-center mb-6 text-sm">
+              <h3 className="text-xl font-bold text-center mb-2 text-slate-900">Sign Out</h3>
+              <p className="text-slate-500 text-center mb-6 text-sm">
                 Are you sure you want to log out?
               </p>
               <div className="flex gap-3">
                 <button 
                   onClick={() => setShowLogoutModal(false)}
-                  className="flex-1 py-3 px-4 bg-white/5 hover:bg-white/10 text-white rounded-xl font-medium transition-colors border border-white/10"
+                  className="flex-1 py-3 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-xl font-bold transition-colors border border-slate-200"
                 >
                   Cancel
                 </button>
                 <button 
                   onClick={confirmLogout}
-                  className="flex-1 py-3 px-4 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium transition-colors shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+                  className="flex-1 py-3 px-4 bg-red-500 hover:bg-red-600 text-white rounded-xl font-bold transition-colors shadow-md"
                 >
                   Logout
                 </button>

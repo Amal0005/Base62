@@ -104,13 +104,13 @@ export default function VerifyOtp() {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 1.05 }}
         transition={{ duration: 0.4 }}
-        className="min-h-screen bg-[#030014] flex items-center justify-center p-4 selection:bg-fuchsia-500/30 font-sans"
+        className="min-h-screen bg-transparent flex items-center justify-center p-4 selection:bg-fuchsia-500/30 font-sans"
       >
         <motion.div 
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", bounce: 0.5 }}
-          className="bg-white p-12 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] w-full max-w-md text-center border-4 border-white"
+          className="bg-white p-12 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.05)] w-full max-w-md text-center border border-slate-200"
         >
           <motion.div
             initial={{ scale: 0 }}
@@ -142,22 +142,12 @@ export default function VerifyOtp() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="min-h-screen bg-[#030014] text-white flex overflow-hidden font-sans selection:bg-fuchsia-500/30"
+      className="min-h-screen bg-transparent text-slate-900 flex overflow-hidden font-sans selection:bg-fuchsia-500/30"
     >
       
       {/* Left Animated Section */}
       <div className="hidden lg:flex w-[55%] relative items-center justify-center p-12">
-        {/* Dynamic Background Elements */}
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[20%] left-[20%] w-[400px] h-[400px] bg-teal-500/20 rounded-full blur-[100px]"
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.5, 1], x: [0, 100, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[10%] right-[10%] w-[300px] h-[300px] bg-cyan-500/20 rounded-full blur-[100px]"
-        />
+
         
         {/* Floating Elements Composition */}
         <div className="relative w-full max-w-lg aspect-square perspective-1000">
@@ -165,38 +155,38 @@ export default function VerifyOtp() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="absolute inset-0 m-auto w-64 h-64 bg-white/5 backdrop-blur-2xl rounded-[2rem] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.4)] flex flex-col items-center justify-center z-20 overflow-hidden"
+            className="absolute inset-0 m-auto w-64 h-64 bg-white/70 backdrop-blur-2xl rounded-[2rem] border border-slate-200 shadow-[0_20px_60px_rgba(0,0,0,0.05)] flex flex-col items-center justify-center z-20 overflow-hidden"
           >
             <motion.div 
               animate={{ x: ['-100%', '200%'] }}
               transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 2 }}
-              className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg]"
+              className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[-20deg]"
             />
-            <div className="w-20 h-20 bg-gradient-to-br from-teal-400 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(6,182,212,0.5)]">
+            <div className="w-20 h-20 bg-gradient-to-br from-teal-400 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_10px_30px_rgba(6,182,212,0.3)]">
               <ShieldCheck className="w-10 h-10 text-white" />
             </div>
-            <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">Verify</h2>
-            <p className="text-cyan-200/80 mt-2 font-medium">Identity Check</p>
+            <h2 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600">Verify</h2>
+            <p className="text-slate-500 mt-2 font-medium">Identity Check</p>
           </motion.div>
         </div>
       </div>
 
       {/* Right Form Section */}
       <div className="w-full lg:w-[45%] flex items-center justify-center p-4 sm:p-8 lg:p-0 relative z-40 min-h-screen">
-        <div className="w-full max-w-[420px] lg:max-w-none bg-white/5 lg:bg-white/5 backdrop-blur-2xl lg:backdrop-blur-2xl text-white p-8 sm:p-10 lg:p-12 rounded-[2.5rem] lg:rounded-none lg:rounded-l-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] lg:h-full lg:flex lg:flex-col lg:justify-center border border-white/10 relative overflow-hidden">
+        <div className="w-full max-w-[420px] lg:max-w-none bg-white/70 lg:bg-white/70 backdrop-blur-2xl lg:backdrop-blur-2xl text-slate-900 p-8 sm:p-10 lg:p-12 rounded-[2.5rem] lg:rounded-none lg:rounded-l-[2.5rem] shadow-[0_0_40px_rgba(0,0,0,0.05)] lg:h-full lg:flex lg:flex-col lg:justify-center border border-slate-200/60 relative overflow-hidden">
           
           {/* Subtle Mobile Inner Gradient */}
-          <div className="lg:hidden absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-cyan-500/10 to-transparent pointer-events-none"></div>
+          <div className="lg:hidden absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-cyan-500/5 to-transparent pointer-events-none"></div>
 
           <div className="w-full lg:max-w-[380px] mx-auto relative z-10">
           
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, type: "spring", bounce: 0.5 }} className="mb-8 text-center">
-            <div className="w-16 h-16 bg-cyan-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm border border-cyan-500/30">
-              <Mail className="w-8 h-8 text-cyan-400" />
+            <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm border border-cyan-200">
+              <Mail className="w-8 h-8 text-cyan-600" />
             </div>
             <h1 className="text-3xl font-bold mb-2 tracking-tight">Check Your Email</h1>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              We've sent a 6-digit verification code to <span className="font-semibold text-cyan-400">{email}</span>.
+            <p className="text-slate-500 text-sm leading-relaxed">
+              We've sent a 6-digit verification code to <span className="font-semibold text-cyan-600">{email}</span>.
             </p>
           </motion.div>
 
@@ -207,7 +197,7 @@ export default function VerifyOtp() {
               <input 
                 type="text" 
                 maxLength={6}
-                className={`w-full py-4 text-center text-4xl font-bold tracking-[0.5em] border-2 ${fieldError ? 'border-red-400/50 bg-red-400/10 text-white focus:border-red-500' : 'border-white/10 bg-white/5 text-white focus:border-cyan-500/50 focus:bg-white/10'} rounded-xl outline-none transition-all font-mono`}
+                className={`w-full py-4 text-center text-4xl font-bold tracking-[0.5em] border-2 ${fieldError ? 'border-red-300 bg-red-50 text-slate-900 focus:border-red-500' : 'border-slate-200 bg-white text-slate-900 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/10'} rounded-xl outline-none transition-all font-mono`}
                 placeholder="••••••" 
                 value={otp}
                 onChange={(e) => {
@@ -215,7 +205,7 @@ export default function VerifyOtp() {
                   if (fieldError) setFieldError('');
                 }}
               />
-              {fieldError && <p className="text-red-400 text-xs text-center mt-2">{fieldError}</p>}
+              {fieldError && <p className="text-red-500 text-xs text-center mt-2">{fieldError}</p>}
             </motion.div>
 
             <motion.button 
@@ -241,21 +231,21 @@ export default function VerifyOtp() {
             </motion.button>
             
             {resendMessage && (
-              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-4 p-3 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm rounded-xl text-center flex items-center justify-center gap-2 font-medium">
+              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-4 p-3 bg-cyan-50 border border-cyan-200 text-cyan-700 text-sm rounded-xl text-center flex items-center justify-center gap-2 font-medium">
                 <CheckCircle className="w-4 h-4" />
                 {resendMessage}
               </motion.div>
             )}
             
-            <motion.div variants={itemVariants} className="text-center text-sm text-gray-400 mt-6 flex flex-col items-center gap-2">
+            <motion.div variants={itemVariants} className="text-center text-sm text-slate-500 mt-6 flex flex-col items-center gap-2">
               <p>
                 Didn't receive the code? 
-                <button type="button" onClick={handleResend} disabled={resendLoading || otpTimeLeft > 0} className={`ml-1 font-bold transition-colors ${otpTimeLeft > 0 ? 'text-gray-600 cursor-not-allowed' : 'text-cyan-400 hover:underline'}`}>
+                <button type="button" onClick={handleResend} disabled={resendLoading || otpTimeLeft > 0} className={`ml-1 font-bold transition-colors ${otpTimeLeft > 0 ? 'text-slate-400 cursor-not-allowed' : 'text-cyan-600 hover:underline'}`}>
                   {resendLoading ? 'Sending...' : 'Resend Code'}
                 </button>
               </p>
               {otpTimeLeft > 0 && (
-                <div className="flex items-center gap-1.5 text-gray-400 bg-white/5 px-3 py-1 rounded-full text-xs font-medium border border-white/10">
+                <div className="flex items-center gap-1.5 text-slate-600 bg-slate-100 px-3 py-1 rounded-full text-xs font-medium border border-slate-200">
                   <Clock className="w-3 h-3" />
                   Code expires in {Math.floor(otpTimeLeft / 60)}:{(otpTimeLeft % 60).toString().padStart(2, '0')}
                 </div>

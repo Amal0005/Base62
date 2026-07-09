@@ -17,8 +17,8 @@ import { Otp, OtpSchema } from './schemas/otpSchema';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET') || 'defaultSecret',
-        signOptions: { expiresIn: '1h' },
+        secret: configService.get<string>('JWT_SECRET') as string,
+        signOptions: { expiresIn: parseInt(configService.get<string>('JWT_ACCESS_EXPIRES') || '900', 10) },
       }),
     }),
   ],

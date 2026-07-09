@@ -31,8 +31,8 @@ export class AuthService implements IAuthService {
     
     const access_token = await this.jwtService.signAsync(payload);
     const refresh_token = await this.jwtService.signAsync(payload, {
-      secret: process.env.JWT_REFRESH_SECRET || 'refreshSecret',
-      expiresIn: '7d',
+      secret: process.env.JWT_REFRESH_SECRET as string,
+      expiresIn: parseInt(process.env.JWT_REFRESH_EXPIRES || '604800', 10),
     });
 
     return {
@@ -44,7 +44,7 @@ export class AuthService implements IAuthService {
   async refreshToken(token: string): Promise<{ access_token: string }> {
     try {
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: process.env.JWT_REFRESH_SECRET || 'refreshSecret',
+        secret: process.env.JWT_REFRESH_SECRET as string,
       });
 
       // Generate a new access token
