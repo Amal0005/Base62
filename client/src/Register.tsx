@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { registerSchema } from './validation';
 import { authService } from './services/authService';
-import { Link, User, Mail, Lock, ShieldCheck, ArrowRight, Zap, Activity } from 'lucide-react';
+import { Link, User, Mail, Lock, ShieldCheck, ArrowRight, Zap, Activity, Eye, EyeOff } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 
 export default function Register() {
@@ -17,6 +17,8 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -210,13 +212,20 @@ export default function Register() {
               <div className="relative flex items-center group">
                 <Lock className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.password ? 'text-red-500' : 'text-slate-400 group-focus-within:text-yellow-500'}`} />
                 <input 
-                  type="password" 
+                  type={showPassword ? "text" : "password"} 
                   name="password"
-                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.password ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
+                  className={`w-full py-2.5 pr-12 pl-11 border ${fieldErrors.password ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
                   placeholder="Create a password" 
                   value={formData.password}
                   onChange={handleChange}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 text-slate-400 hover:text-slate-600 focus:outline-none"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
               {fieldErrors.password && <p className="text-red-500 text-xs mt-1.5">{fieldErrors.password}</p>}
             </motion.div>
@@ -226,13 +235,20 @@ export default function Register() {
               <div className="relative flex items-center group">
                 <ShieldCheck className={`absolute left-4 w-4 h-4 transition-colors ${fieldErrors.confirmPassword ? 'text-red-500' : 'text-slate-400 group-focus-within:text-yellow-500'}`} />
                 <input 
-                  type="password" 
+                  type={showConfirmPassword ? "text" : "password"} 
                   name="confirmPassword"
-                  className={`w-full py-2.5 pr-4 pl-11 border ${fieldErrors.confirmPassword ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
+                  className={`w-full py-2.5 pr-12 pl-11 border ${fieldErrors.confirmPassword ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-slate-200 bg-white focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/10'} rounded-xl text-sm outline-none transition-all text-slate-900 placeholder:text-slate-400 shadow-sm`}
                   placeholder="Repeat your password" 
                   value={formData.confirmPassword}
                   onChange={handleChange}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-4 text-slate-400 hover:text-slate-600 focus:outline-none"
+                >
+                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
               {fieldErrors.confirmPassword && <p className="text-red-500 text-xs mt-1.5">{fieldErrors.confirmPassword}</p>}
             </motion.div>
